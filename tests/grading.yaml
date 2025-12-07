@@ -1,0 +1,52 @@
+# Grading configuration for practical exam
+
+assignment:
+  id: "L1-practical"
+  name: "Level 1: Foundations Practical Exam"
+  level: 1
+  type: "practical-exam"
+  passing_score: 70
+
+checks:
+  - id: instantiate
+    name: "Agent Instantiation"
+    points: 15
+    type: instantiate
+    file: solution/agent.py
+  - id: swml_valid
+    name: "SWML Generation"
+    points: 15
+    type: swml_valid
+    file: solution/agent.py
+  - id: func1
+    name: "Function 1 exists"
+    points: 15
+    type: function_exists
+    file: solution/agent.py
+    function: function_one
+  - id: func2
+    name: "Function 2 exists"
+    points: 15
+    type: function_exists
+    file: solution/agent.py
+    function: function_two
+  - id: has_prompt
+    name: "Has prompt configured"
+    points: 20
+    type: swml_contains
+    file: solution/agent.py
+    require:
+      - text: "prompt"
+  - id: has_voice
+    name: "Has voice configured"
+    points: 20
+    type: swml_contains
+    file: solution/agent.py
+    require:
+      - text: "voice"
+
+feedback:
+  pass: |
+    Congratulations! You've passed the Level 1 Practical Exam!
+  fail: |
+    Some requirements weren't met. Review the feedback and try again.
