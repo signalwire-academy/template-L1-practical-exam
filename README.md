@@ -1,2 +1,59 @@
-# template-L1-practical-exam
-Level 1: Foundations Practical Exam
+# Level 1: Foundations Practical Exam
+
+**Time Limit:** 90 minutes  
+**Passing Score:** 70%
+
+## Objective
+
+Build a complete voice agent from scratch
+
+## Requirements
+
+- Create an agent with proper greeting
+- Add at least 2 SWAIG functions
+- Configure voice and language
+- Handle basic error cases
+
+## Instructions
+
+1. Clone this repository
+2. Implement your solution in `solution/agent.py`
+3. Test locally with `swaig-test`
+4. Push to trigger auto-grading
+
+## Grading Criteria
+
+| Criteria | Points |
+|----------|--------|
+| Agent instantiates without errors | 15 |
+| Generates valid SWML | 15 |
+| All required functions present | 30 |
+| Functions return expected results | 25 |
+| Code quality and organization | 15 |
+| **Total** | **100** |
+
+## Testing Locally
+
+```bash
+# Install dependencies
+pip install signalwire-agents
+
+# Check your agent loads
+swaig-test solution/agent.py --list-tools
+
+# Verify SWML output
+swaig-test solution/agent.py --dump-swml
+
+# Test specific functions
+swaig-test solution/agent.py --exec function_name --param value
+```
+
+## Submission
+
+Push your code to the `main` branch. Grading runs automatically.
+
+Check the "Grading Results" issue for your score.
+
+---
+
+*SignalWire AI Agents Certification - Level 1 Practical Exam*
