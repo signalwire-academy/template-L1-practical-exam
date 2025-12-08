@@ -1,52 +1,126 @@
-# Grading configuration for practical exam
+# Grading configuration for Level 1 Practical Exam
+# Scenario: TechSupport Inc. - Customer Support Agent
 
 assignment:
   id: "L1-practical"
-  name: "Level 1: Foundations Practical Exam"
+  name: "Level 1 Practical: Certified Agent Developer"
   level: 1
   type: "practical-exam"
   passing_score: 70
 
 checks:
+  # Part 1: Basic Agent Setup (25 points)
   - id: instantiate
-    name: "Agent Instantiation"
-    points: 15
+    name: "Agent loads without errors"
+    points: 10
     type: instantiate
-    file: solution/agent.py
+    file: solution/techsupport_agent.py
+
   - id: swml_valid
-    name: "SWML Generation"
-    points: 15
+    name: "Generates valid SWML"
+    points: 10
     type: swml_valid
-    file: solution/agent.py
-  - id: func1
-    name: "Function 1 exists"
-    points: 15
-    type: function_exists
-    file: solution/agent.py
-    function: function_one
-  - id: func2
-    name: "Function 2 exists"
-    points: 15
-    type: function_exists
-    file: solution/agent.py
-    function: function_two
+    file: solution/techsupport_agent.py
+
   - id: has_prompt
-    name: "Has prompt configured"
-    points: 20
+    name: "Has prompt sections configured"
+    points: 5
     type: swml_contains
-    file: solution/agent.py
+    file: solution/techsupport_agent.py
     require:
-      - text: "prompt"
-  - id: has_voice
-    name: "Has voice configured"
-    points: 20
+      - text: "role"
+
+  # Part 2: SWAIG Functions (40 points)
+  - id: func_check_ticket
+    name: "check_ticket_status function exists"
+    points: 10
+    type: function_exists
+    file: solution/techsupport_agent.py
+    function: check_ticket_status
+
+  - id: func_create_ticket
+    name: "create_ticket function exists"
+    points: 10
+    type: function_exists
+    file: solution/techsupport_agent.py
+    function: create_ticket
+
+  - id: exec_valid_ticket
+    name: "check_ticket_status returns data for valid ticket"
+    points: 10
+    type: exec
+    file: solution/techsupport_agent.py
+    function: check_ticket_status
+    args:
+      ticket_id: "T-1001"
+    expect:
+      stdout_contains:
+        - "open"
+
+  - id: exec_invalid_ticket
+    name: "check_ticket_status handles invalid ticket"
+    points: 5
+    type: exec
+    file: solution/techsupport_agent.py
+    function: check_ticket_status
+    args:
+      ticket_id: "T-9999"
+    expect:
+      stdout_contains:
+        - "not found"
+
+  - id: exec_create_ticket
+    name: "create_ticket returns confirmation"
+    points: 5
+    type: exec
+    file: solution/techsupport_agent.py
+    function: create_ticket
+    args:
+      issue_type: "login"
+      description: "Cannot log in to account"
+    expect:
+      stdout_contains:
+        - "T-"
+
+  # Part 3: Voice Configuration (20 points)
+  - id: has_language
+    name: "Language configured"
+    points: 10
     type: swml_contains
-    file: solution/agent.py
+    file: solution/techsupport_agent.py
     require:
-      - text: "voice"
+      - text: "languages"
+
+  - id: has_fillers
+    name: "Filler phrases configured"
+    points: 10
+    type: swml_contains
+    file: solution/techsupport_agent.py
+    require:
+      - text: "fillers"
+
+  # Part 4: Code Quality (15 points) - Manual review
+  # These points are awarded during manual review for:
+  # - Clean, readable code
+  # - Proper error handling
+  # - Good prompt engineering
 
 feedback:
   pass: |
-    Congratulations! You've passed the Level 1 Practical Exam!
+    Congratulations! Your agent passed the automated checks.
+
+    Your submission will now be reviewed by an instructor for:
+    - Code quality and organization
+    - Live demonstration
+    - Overall implementation quality
+
+    You will receive final results after manual review.
   fail: |
-    Some requirements weren't met. Review the feedback and try again.
+    Some automated checks did not pass. Review the feedback above.
+
+    Common issues:
+    - Make sure your file is named `techsupport_agent.py`
+    - Verify functions are named exactly as specified
+    - Test locally with `swaig-test` before submitting
+
+    You can push again to re-run the grader.
