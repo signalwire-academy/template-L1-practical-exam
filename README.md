@@ -126,4 +126,10 @@ swaig-test solution/techsupport_agent.py --exec create_ticket \
 
 ---
 
+## Next Assignment
+
+Congratulations on completing Level 1! Ready for Level 2? [**Start Lab 2.1: Function Results & Actions**](https://classroom.github.com/a/4Vcg0Jxl)
+
+---
+
 *SignalWire AI Agents Certification - Level 1 Practical Exam*
